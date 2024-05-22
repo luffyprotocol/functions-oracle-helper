@@ -50,9 +50,9 @@ router.post("/encode-return-data", async (req, res) => {
     [merkleRoot, ipfsHash]
   );
   res.set("Content-Type", "application/octet-stream");
-  const buffer = hexToBytes(returnDataHex);
-  console.log(buffer.buffer);
-  res.status(200).send(buffer.buffer);
+  const buffer = Buffer.from(hexToBytes(returnDataHex));
+  // console.log(buffer.buffer);
+  res.status(200).send(buffer);
 });
 
 module.exports = router;
