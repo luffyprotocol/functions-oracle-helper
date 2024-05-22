@@ -9,16 +9,9 @@ const {
 const { ethers } = require("ethers");
 router.post("/compute-merkle-root", async (req, res) => {
   const { points } = req.body;
-  const hexValues = padArrayWithZeros(points).map((point) =>
+  const hexValues = points.map((point) =>
     keccak256(`0x${point.toString(16).padStart(64, "0")}`)
   );
-
-  function padArrayWithZeros(array) {
-    const paddedLength = Math.pow(2, Math.ceil(Math.log2(array.length)));
-    return array.concat(
-      Array.from({ length: paddedLength - array.length }, () => 0)
-    );
-  }
 
   function recursiveMerkleRoot(hashes) {
     if (hashes.length === 1) {
