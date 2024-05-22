@@ -8,8 +8,8 @@ const {
 } = require("viem");
 
 router.post("/compute-merkle-root", async (req, res) => {
-  const { playerPoints } = req.body;
-  const hexValues = padArrayWithZeros(playerPoints).map((point) =>
+  const { points } = req.body;
+  const hexValues = padArrayWithZeros(points).map((point) =>
     keccak256(`0x${point.toString(16).padStart(64, "0")}`)
   );
 
@@ -41,6 +41,18 @@ router.post("/compute-merkle-root", async (req, res) => {
 
   res.status(200).json({
     merkleRoot: recursiveMerkleRoot(hexValues),
+  });
+});
+router.post("/encode-return-data", async (req, res) => {
+  const { merkleRoot, ipfsHash } = req.body;
+
+  const returnDataHex = encodeAbiParameters(
+    parseAbiParameters("bytes32, string"),
+    [merkleRoot, ipfsHash]
+  );
+
+  res.status(200).json({
+    returnData: hexToBytes(returnDataHex),
   });
 });
 
