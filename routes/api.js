@@ -10,7 +10,7 @@ const { ethers } = require("ethers");
 router.post("/compute-merkle-root", async (req, res) => {
   const { points } = req.body;
   const hexValues = padArrayWithZeros(points).map((point) =>
-    keccak256(`0x${point.toString(16).padStart(64, "0")}`)
+    keccak256(`0x${point.toString(16).padStart(128, "0")}`)
   );
 
   function padArrayWithZeros(array) {
