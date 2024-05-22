@@ -2,7 +2,7 @@ const cookieSession = require("cookie-session");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const authRoute = require("./routes/api");
 const app = express();
 app.use(express.json());

@@ -45,14 +45,13 @@ router.post("/compute-merkle-root", async (req, res) => {
 });
 router.post("/encode-return-data", async (req, res) => {
   const { merkleRoot, ipfsHash } = req.body;
-
   const returnDataHex = encodeAbiParameters(
     parseAbiParameters("bytes32, string"),
     [merkleRoot, ipfsHash]
   );
 
   res.status(200).json({
-    returnData: hexToBytes(returnDataHex),
+    returnData: returnDataHex,
   });
 });
 
