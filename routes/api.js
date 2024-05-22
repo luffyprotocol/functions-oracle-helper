@@ -4,9 +4,9 @@ const {
   encodePacked,
   encodeAbiParameters,
   parseAbiParameters,
-  hexToBytes,
 } = require("viem");
 
+const { ethers } = require("ethers");
 router.post("/compute-merkle-root", async (req, res) => {
   const { points } = req.body;
   const hexValues = padArrayWithZeros(points).map((point) =>
@@ -49,10 +49,10 @@ router.post("/encode-return-data", async (req, res) => {
     parseAbiParameters("bytes32, string"),
     [merkleRoot, ipfsHash]
   );
-  res.set("Content-Type", "application/octet-stream");
-  const buffer = Buffer.from(hexToBytes(returnDataHex));
-  // console.log(buffer.buffer);
-  res.status(200).send(buffer);
+  res.set("Content-Type", "application/json");
+  res.status(200).send({
+    returnData: returnDataHex,
+  });
 });
 
 module.exports = router;
