@@ -1,14 +1,11 @@
 const router = require("express").Router();
-const fs = require("fs");
-const FormData = require("form-data");
-const axios = require("axios");
 const {
   keccak256,
   encodePacked,
   encodeAbiParameters,
   parseAbiParameters,
   hexToBytes,
-} = await import("viem");
+} = require("viem");
 
 router.post("/compute-merkle-root", async (req, res) => {
   const { playerPoints } = req.body;
@@ -46,3 +43,5 @@ router.post("/compute-merkle-root", async (req, res) => {
     merkleRoot: recursiveMerkleRoot(hexValues),
   });
 });
+
+module.exports = router;
