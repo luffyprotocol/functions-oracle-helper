@@ -49,10 +49,7 @@ router.post("/encode-return-data", async (req, res) => {
     parseAbiParameters("bytes32, string"),
     [merkleRoot, ipfsHash]
   );
-
-  res.status(200).json({
-    returnData: returnDataHex,
-  });
+  res.status(200).json(hexToBytes(returnDataHex));
 });
 
 module.exports = router;
