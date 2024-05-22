@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
-const authRoute = require("./routes/auth");
+const authRoute = require("./routes/api");
 const app = express();
 app.use(express.json());
 app.use(
@@ -20,7 +20,7 @@ app.use(
     credentials: true,
   })
 );
-app.use("/auth", authRoute);
+app.use("/api", authRoute);
 app.use(bodyParser.json());
 app.listen(port, () => {
   console.log(port);
