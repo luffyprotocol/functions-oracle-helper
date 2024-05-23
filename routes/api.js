@@ -4,6 +4,7 @@ const {
   encodePacked,
   encodeAbiParameters,
   parseAbiParameters,
+  toBytes,
 } = require("viem");
 
 const { ethers } = require("ethers");
@@ -13,6 +14,11 @@ function padArrayWithZeros(array) {
   return array.concat(
     Array.from({ length: paddedLength - array.length }, () => 0)
   );
+}
+
+function uint8ArrayToBase64(uint8Array) {
+  const binaryString = String.fromCharCode.apply(null, uint8Array);
+  return Buffer.from(binaryString, "binary").toString("base64");
 }
 
 router.post("/compute-merkle-root", async (req, res) => {
@@ -52,9 +58,10 @@ router.post("/encode-return-data", async (req, res) => {
     parseAbiParameters("bytes32, string"),
     [merkleRoot, ipfsHash]
   );
+
   res.set("Content-Type", "application/json");
   res.status(200).send({
-    returnData: returnDataHex,
+    returnData: uint8ArrayToBase64(toBytes(returnDataHex)),
   });
 });
 
