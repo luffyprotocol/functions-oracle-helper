@@ -7,8 +7,6 @@ const {
   toBytes,
 } = require("viem");
 
-const { ethers } = require("ethers");
-
 function padArrayWithZeros(array) {
   const paddedLength = Math.pow(2, Math.ceil(Math.log2(array.length)));
   return array.concat(
@@ -52,6 +50,7 @@ router.post("/compute-merkle-root", async (req, res) => {
     merkleRoot: recursiveMerkleRoot(hexValues),
   });
 });
+
 router.post("/encode-return-data", async (req, res) => {
   const { merkleRoot, ipfsHash } = req.body;
   const returnDataHex = encodeAbiParameters(
