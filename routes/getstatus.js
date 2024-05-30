@@ -85,12 +85,21 @@ const getStatus = async (chain, targetChain, messageId) => {
 router.post("/getstatus", async (req, res) => {
   const { chain, targetChain, messageId } = req.body;
   const status = await getStatus(chain, targetChain, messageId);
-  res.status(200).json({
-    status: status,
-    chain: chain,
-    targetChain: targetChain,
-    messageId: messageId,
-  });
+  if (status) {
+    res.status(200).json({
+      status: status,
+      chain: chain,
+      targetChain: targetChain,
+      messageId: messageId,
+    });
+  } else {
+    res.status(200).json({
+      status: `Either the message ${messageId} does not exist OR it has not been processed yet on destination chain`,
+      chain: chain,
+      targetChain: targetChain,
+      messageId: messageId,
+    });
+  }
 });
 
 module.exports = router;
