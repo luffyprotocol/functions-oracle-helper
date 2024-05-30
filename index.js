@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 5001;
 const authRoute = require("./routes/api");
+const ccipRoute = require("./routes/getstatus");
 const app = express();
 app.use(express.json());
 app.use(
@@ -21,6 +22,7 @@ app.use(
   })
 );
 app.use("/api", authRoute);
+app.use("/ccip", ccipRoute);
 app.use(bodyParser.json());
 app.listen(port, () => {
   console.log(port);
