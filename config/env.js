@@ -1,6 +1,5 @@
 require("dotenv").config();
 const supportedNetworksTestnet = require("../constants/testnet.json");
-const { merge } = require("lodash");
 
 const getRpcUrlName = (network) => {
   if (network == "11155111") return "ETHEREUM_SEPOLIA_RPC_URL";
