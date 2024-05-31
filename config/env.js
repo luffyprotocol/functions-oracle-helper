@@ -1,11 +1,17 @@
-const { supportedNetworks } = require("./router");
 require("dotenv").config();
+const supportedNetworksTestnet = require("../constants/testnet.json");
+const { merge } = require("lodash");
 
-const getRpcUrlName = (network) =>
-  network.replace(/([A-Z])/g, "_$1").toUpperCase() + "_RPC_URL";
+const getRpcUrlName = (network) => {
+  if (network == "11155111") return "ETHEREUM_SEPOLIA_RPC_URL";
+  else if (network == "11155420") return "OPTIMISM_SEPOLIA_RPC_URL";
+  else if (network == "43113") return "AVALANCHE_FUJI_RPC_URL";
+  else if (network == "421614") return "ARBITRUM_SEPOLIA_RPC_URL";
+  else return "BASE_SEPOLIA_RPC_URL";
+};
 
 const getProviderRpcUrl = (network) => {
-  if (!supportedNetworks.includes(network))
+  if (supportedNetworksTestnet[network] === undefined)
     throw new Error("Unsupported network: " + network);
 
   const environmentVariableName = getRpcUrlName(network);
