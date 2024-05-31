@@ -82,7 +82,7 @@ const getStatus = async (chain, targetChain, messageId) => {
   );
 };
 
-router.post("/getstatus", async (req, res) => {
+router.post("/get-status", async (req, res) => {
   const { chain, targetChain, messageId } = req.body;
   const status = await getStatus(chain, targetChain, messageId);
   if (status) {
