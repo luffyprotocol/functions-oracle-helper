@@ -8,7 +8,7 @@ const {
 const { ethers, JsonRpcProvider } = require("ethers");
 
 const routerAbi = require("../constants/abi/Router.json"); // Load Router contract ABI.
-const offRampAbi = require("../constants/abi/OffRamp.json");
+const offRampAbi = require("../constants/abi/offRamp.json");
 
 const getStatus = async (chain, targetChain, messageId) => {
   const destinationRpcUrl = getProviderRpcUrl(targetChain);
