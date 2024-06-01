@@ -1,5 +1,6 @@
 const { supportedNetworks } = require("./router");
 require("dotenv").config();
+//dummy
 
 const getRpcUrlName = (network) =>
   network.replace(/([A-Z])/g, "_$1").toUpperCase() + "_RPC_URL";
